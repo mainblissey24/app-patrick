@@ -3,9 +3,25 @@ import { Button, View } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "react-native-paper";
 import styles from "../config/styles";
+import { useEffect, useState } from "react";
 
-export default function HomeScreen({}) {
+export default function HomeScreen({ }) {
+
+  const [contador, setContador] = useState(1);
   const navigation = useNavigation();
+
+  function mostraValorContador(){
+    console.log(contador);
+  }
+
+  useEffect(mostraValorContador, [contador])
+
+  useEffect(()=>{
+    console.log(contador);
+  }, [contador]);
+  useEffect(()=>{
+    console.log("Entrei");
+  }, []);
   return (
     <View style={styles.container}>
       {/* note que aqui estamos usando o TEXT de Native Paper*/}
@@ -19,6 +35,10 @@ export default function HomeScreen({}) {
       <Button
         onPress={() => navigation.navigate("SobreScreen")}
         title="Ir para sobre"
+      />
+      <Button
+        onPress={() => setContador(contador + 1)}
+        title="aumenta contador"
       />
     </View>
   );
